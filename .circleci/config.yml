@@ -100,19 +100,19 @@ jobs:
           name: install openssl
           command: |
             ridk enable
-            pacman -S mingw-w64-x86_64-openssl
+            pacman -S --noconfirm mingw-w64-x86_64-openssl
 
       - run:
           name: install libiconv
           command: |
             ridk enable
-            pacman -S mingw-w64-x86_64-libiconv
+            pacman -S --noconfirm mingw-w64-x86_64-libiconv
 
       - run:
           name: install freetds
           command: |
             ridk enable
-            pacman -S mingw-w64-x86_64-freetds
+            pacman -S --noconfirm mingw-w64-x86_64-freetds
 
       # - run:
       #     name: build openssl
