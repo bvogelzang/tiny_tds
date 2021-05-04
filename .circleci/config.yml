@@ -96,42 +96,42 @@ jobs:
             - ./vendor/bundle
           key: v1-bundle-<< parameters.ruby_version >>-{{ .Branch }}-{{ checksum "tiny_tds.gemspec" }}
 
-      - run:
-          name: install openssl
-          command: |
-            ridk enable
-            pacman -S --noconfirm mingw-w64-x86_64-openssl
-
-      - run:
-          name: install libiconv
-          command: |
-            ridk enable
-            pacman -S --noconfirm mingw-w64-x86_64-libiconv
-
-      - run:
-          name: install freetds
-          command: |
-            ridk enable
-            pacman -S --noconfirm mingw-w64-x86_64-freetds
-
       # - run:
-      #     name: build openssl
+      #     name: install openssl
       #     command: |
       #       ridk enable
-      #       bundle exec rake ports:openssl
+      #       pacman -S --noconfirm mingw-w64-x86_64-openssl
 
       # - run:
-      #     name: build libiconv
-      #     no_output_timeout: 2h
+      #     name: install libiconv
       #     command: |
       #       ridk enable
-      #       bundle exec rake ports:libiconv
+      #       pacman -S --noconfirm mingw-w64-x86_64-libiconv
 
       # - run:
-      #     name: build freetds
+      #     name: install freetds
       #     command: |
       #       ridk enable
-      #       bundle exec rake ports:freetds
+      #       pacman -S --noconfirm mingw-w64-x86_64-freetds
+
+      - run:
+          name: build openssl
+          command: |
+            ridk enable
+            bundle exec rake ports:openssl
+
+      - run:
+          name: build libiconv
+          no_output_timeout: 15m
+          command: |
+            ridk enable
+            bundle exec rake ports:libiconv
+
+      - run:
+          name: build freetds
+          command: |
+            ridk enable
+            bundle exec rake ports:freetds
 
       - run:
           name: build gem
