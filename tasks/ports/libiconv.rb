@@ -8,12 +8,12 @@ module Ports
       set_patches
     end
 
-    # def cook
-    #   chdir_for_build do
-    #     super
-    #   end
-    #   self
-    # end
+    def cook
+      chdir_for_build do
+        super
+      end
+      self
+    end
 
     private
 
@@ -21,7 +21,7 @@ module Ports
     # folders don't support symlinks, but libiconv expects it for a build on
     # Linux. We work around this limitation by using the temp dir for cooking.
     def chdir_for_build
-      build_dir = ENV['RCD_HOST_RUBY_PLATFORM'].to_s =~ /mingw|mswin|cygwin/ ? '/tmp' : '.'
+      build_dir = '/tmp' #ENV['RCD_HOST_RUBY_PLATFORM'].to_s =~ /mingw|mswin|cygwin/ ? '/tmp' : '.'
       Dir.chdir(build_dir) do
         yield
       end

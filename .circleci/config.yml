@@ -114,40 +114,39 @@ jobs:
       #       ridk enable
       #       pacman -S --noconfirm mingw-w64-x86_64-freetds
 
-      - run:
-          name: build openssl
-          command: |
-            ridk enable
-            bundle exec rake ports:openssl
+      # - run:
+      #     name: build openssl
+      #     command: |
+      #       ridk enable
+      #       bundle exec rake ports:openssl
 
       - run:
           name: build libiconv
           no_output_timeout: 15m
           command: |
-            ridk enable
-            bundle exec rake ports:libiconv
+            ridk exec bundle exec rake ports:libiconv
 
-      - run:
-          name: build freetds
-          command: |
-            ridk enable
-            bundle exec rake ports:freetds
+      # - run:
+      #     name: build freetds
+      #     command: |
+      #       ridk enable
+      #       bundle exec rake ports:freetds
 
-      - run:
-          name: build gem
-          command: |
-            bundle exec rake build
+      # - run:
+      #     name: build gem
+      #     command: |
+      #       bundle exec rake build
 
-      - run:
-          # imported from setup.sh, although we should do better...
-          name: wait for database
-          command: |
-            sleep 10
+      # - run:
+      #     # imported from setup.sh, although we should do better...
+      #     name: wait for database
+      #     command: |
+      #       sleep 10
 
-      - run:
-          name: run tests
-          command: |
-            TINYTDS_UNIT_HOST=localhost bundle exec rake test
+      # - run:
+      #     name: run tests
+      #     command: |
+      #       TINYTDS_UNIT_HOST=localhost bundle exec rake test
 
 workflows:
   test_supported_ruby_versions:
